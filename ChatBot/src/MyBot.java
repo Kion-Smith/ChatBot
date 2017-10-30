@@ -6,7 +6,7 @@ public class MyBot extends PircBot
 {
 	public MyBot()
 	{
-		this.setName("My bot");
+		this.setName("abot123456");
 	}
 	
 	public void onMessage(String channel, String sender,String login, String hostname, String message) 

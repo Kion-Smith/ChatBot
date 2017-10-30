@@ -13,6 +13,8 @@ public class ChatBotMain
 		{
 			
 		}
-		b.joinChannel("#picrbot");
+		b.joinChannel("#testtesttest");
+		//sends current time
+		b.onMessage( "#testtesttest",  "Sender", "test",  "user",  "time");
 	}
 }
