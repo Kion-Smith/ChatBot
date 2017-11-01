@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import javax.swing.JFrame;
+
 public class ChatBotMain
 {
 	public static void main(String [] args) throws Exception
@@ -12,6 +14,13 @@ public class ChatBotMain
 		String channel = "#KionsChatTestRoom";
 		String server  = "irc.freenode.net";
 		Socket socket = new Socket(server, 6667);
+		
+		chatFrame cf = new chatFrame();
+		cf.setTitle("IRC Chat");
+		cf.setSize(1024, 768);
+		cf.setVisible(true);
+		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//b.messages(channel, reader.readLine());
 		
 		MyBot b = new MyBot();
 		b.setVerbose(true);
@@ -35,7 +44,6 @@ public class ChatBotMain
 			b.onMessage("#KionsChatTestRoom",  "Kion", "test",  "user",  "time");
 		//}
 		
-		//b.messages(channel, reader.readLine());
 		/*
 		 * This is for a users
 		
