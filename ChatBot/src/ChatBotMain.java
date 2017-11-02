@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 
@@ -21,40 +23,45 @@ public class ChatBotMain
 		cf.setVisible(true);
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//b.messages(channel, reader.readLine());
-	/*
+		userBot u = new userBot("Neon");
+		u.setVerbose(true);
+		u.connect("irc.freenode.net");
+		u.joinChannel(channel);
+		
 		MyBot b = new MyBot();
 		b.setVerbose(true);
-		try
-		{
-			b.connect("irc.freenode.net");
-		}
-		catch(Exception e)
-		{
-			
-		}
+		b.connect("irc.freenode.net");
 		b.joinChannel(channel);
 		//sends current time
-		*/
+		
+		
+		b.onMessage("#KionsChatTestRoom",  "Kion", "test",  "user",  "time");
 		
 		
 		//if(reader.equals(""))
 		//{
-			//b.onMessage("#KionsChatTestRoom",  "Kion", "test",  "user",  "time");
+			
 		//}
+	
 		
+		//MyBot b = new MyBot();
+		//b.setVerbose(true);
+		//b.joinChannel(channel);
+	
+		
+		/*
         String nick = "person1";
-        String login = "person1";
+        String login = "TestPeople";
 
 
         // The channel which the bot will join.
       //  String channel = "#irchacks";
         
         // Connect directly to the IRC server.
-        Socket socket = new Socket(server, 6667);
-        BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(socket.getOutputStream( )));
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(socket.getInputStream( )));
+        
+      //  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
+        PrintWriter writer = new PrintWriter(socket.getOutputStream(),true );
+        BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
         
         // Log on to the server.
         writer.write("NICK " + nick + "\r\n");
@@ -85,20 +92,26 @@ public class ChatBotMain
         // Keep reading lines from the server.
         while ((line = reader.readLine( )) != null) 
         {
-            if (line.equals("ping")) 
+        	if(line.contains("Hello"))
+        	{
+        		Scanner kb = new Scanner(System.in);
+        		System.out.println("tp message");
+        		line = kb.nextLine();
+        		writer.write(line);
+        		writer.flush();
+        	}
+            if (line.toLowerCase( ).startsWith("PING "))
             {
                 // We must respond to PINGs to avoid being disconnected.
                 writer.write("PONG " + line.substring(5) + "\r\n");
                 writer.write("PRIVMSG " + channel + " :I got pinged!\r\n");
-                System.out.println("ran");
                 writer.flush( );
             }
-            else 
-            {
+            else {
                 // Print the raw line received by the bot.
                 System.out.println(line);
             }
-        }
+        }*/
     }
 		
 	
