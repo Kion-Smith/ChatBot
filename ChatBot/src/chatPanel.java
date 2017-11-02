@@ -1,5 +1,6 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,7 +22,7 @@ public class chatPanel extends JPanel
 		
 		sendButton = new JButton("SEND");
 		clearButton = new JButton("CLEAR");
-		chatBoxTextArea = new JTextArea(40,20);
+		chatBoxTextArea = new JTextArea(5,20);
 		messageTextArea= new JTextArea(5,20);
 		chatScrollPane = new JScrollPane(chatBoxTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		messageScrollPane = new JScrollPane(messageTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -35,30 +36,45 @@ public class chatPanel extends JPanel
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();
 		
+	
 		gc.gridx = 0;
 		gc.gridy = 0;
-		add(clearButton,gc);
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.fill = GridBagConstraints.BOTH;
+		gc.weightx = 1;
+		gc.weighty = 1;
+		gc.ipadx=309;
+		gc.ipady =239;
+		gc.insets = new Insets(13,12,0,0);
+		add(chatScrollPane,gc);//problem
 		
+		//gc = new GridBagConstraints();
 		gc.gridx = 0;
 		gc.gridy = 1;
-		add(chatBoxTextArea, gc);
+		gc.fill = GridBagConstraints.BOTH;
+		gc.ipadx = 309;
+		gc.ipady = 49;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.weightx = 1.0;
+		gc.weighty = 1.0;
+		gc.insets = new Insets(11, 12, 13, 0);
+		add(messageScrollPane, gc);
 		
-		gc.gridx =0;
-		gc.gridy = 2;
-		add(messageTextArea, gc);
-		
-		//gc.fill = gc.HORIZONTAL;
 		gc.gridx = 1;
 		gc.gridy = 1;
-		add(chatScrollPane,gc);
+		gc.ipadx = 29;
+		gc.ipady = 49;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(11, 6, 13, 12);
+		add(sendButton, gc);
 		
 		gc.gridx = 1;
-		gc.gridy = 2;
-		add(messageScrollPane,gc);
+		gc.gridy = 0;
+		gc.ipadx = 29;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(235, 6, 0, 12);
+	    add(clearButton, gc);
 		
-		gc.gridx = 2;
-		gc.gridy = 2;
-		add(sendButton, gc);
 
 	}
 	//getters

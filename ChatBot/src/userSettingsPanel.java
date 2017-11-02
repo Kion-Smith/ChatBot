@@ -1,5 +1,6 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -38,44 +39,78 @@ public class userSettingsPanel extends JPanel
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		gc.gridx = 0;
-		gc.gridy =0;
+		gc.gridy = 0;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(16, 12, 0, 0);
 		add(userNameLabel,gc);
 		
-		gc.gridx =1;
-		gc.gridy =0;
+		gc.gridx = 1;
+		gc.gridy = 0;
+		gc.gridheight = 2;
+		gc.ipadx = 99;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(13, 10, 0, 0);
 		add(userNameTextField,gc);
 		
-		gc.gridx =2;
-		gc.gridy =0;
-		add(nickNameLabel,gc);
-		
-		gc.gridx =3;
-		gc.gridy =0;
-		add(nickNameTextField,gc);
-		
-		gc.gridx = 1;
-		gc.gridy =1;
+		gc.gridx = 0;
+		gc.gridy = 2;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(21, 12, 0, 0);
 		add(serverLabel,gc);
 		
-		gc.gridx =1;
-		gc.gridy =1;
+		gc.gridx = 1;
+		gc.gridy = 2;
+		gc.gridheight = 2;
+		gc.ipadx = 99;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(18, 10, 13, 0);
 		add(serverTextField,gc);
 		
-		gc.gridx =2;
-		gc.gridy =1;
+		gc.gridx = 2;
+		gc.gridy = 2;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(21, 18, 0, 0);
 		add(channelLabel,gc);
 		
-		gc.gridx =3;
-		gc.gridy =1;
+		gc.gridx = 3;
+		gc.gridy = 2;
+		gc.gridheight = 2;
+		gc.ipadx = 99;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(18, 18, 13, 0);
 		add(channelTextField,gc);
 		
-		gc.gridx =4;
-		gc.gridy =0;
-		add(connectButton,gc);
+		gc.gridx = 2;
+		gc.gridy = 0;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(16, 18, 0, 0);
+		add(nickNameLabel,gc);
 		
-		gc.gridx =5;
-		gc.gridy =0;
+		gc.gridx = 3;
+		gc.gridy = 0;
+		gc.gridheight = 2;
+		gc.ipadx = 99;
+		gc.anchor = GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(13, 18, 0, 0);
+		add(nickNameTextField,gc);
+		
+		gc.gridx = 5;
+		gc.gridy = 0;
+		gc.gridheight = 4;
+		gc.ipadx = 30;
+	    gc.ipady = 35;
+	    gc.anchor = GridBagConstraints.NORTHWEST;
+	    gc.insets = new Insets(13, 6, 13, 26);
 		add(disconnectButton,gc);
+		
+		gc.gridx = 4;
+		gc.gridy = 0;
+		gc.gridheight = 4;
+		gc.ipadx = 30;
+		gc.ipady = 35;
+		gc.anchor =GridBagConstraints.NORTHWEST;
+		gc.insets = new Insets(13, 30, 13, 0);
+		add(connectButton,gc);
 		
 
 		
