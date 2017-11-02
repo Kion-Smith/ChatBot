@@ -1,13 +1,21 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 public class userSettingsPanel extends JPanel
 {
 	JLabel userNameLabel,nickNameLabel,serverLabel,channelLabel;
 	JTextField userNameTextField,nickNameTextField,serverTextField,channelTextField;
 	JButton connectButton,disconnectButton;
+	Border sortingBorder;
+	
 	public userSettingsPanel()
 	{
 		userNameLabel = new JLabel("Username");
@@ -15,13 +23,63 @@ public class userSettingsPanel extends JPanel
 		serverLabel = new JLabel("Server");
 		channelLabel= new JLabel("Channel");;
 		
-		userNameTextField = new JTextField();
-		nickNameTextField= new JTextField();
-		serverTextField= new JTextField();
-		channelTextField= new JTextField();
+		userNameTextField = new JTextField(20);
+		nickNameTextField= new JTextField(20);
+		serverTextField= new JTextField(20);
+		channelTextField= new JTextField(20);
 		
 		connectButton = new JButton("Connect");
 		disconnectButton = new JButton("Disconnect");
+		
+		sortingBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		
+		setBorder(sortingBorder);
+		setLayout(new GridBagLayout() );
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		gc.gridx = 0;
+		gc.gridy =0;
+		add(userNameLabel,gc);
+		
+		gc.gridx =1;
+		gc.gridy =0;
+		add(userNameTextField,gc);
+		
+		gc.gridx =2;
+		gc.gridy =0;
+		add(nickNameLabel,gc);
+		
+		gc.gridx =3;
+		gc.gridy =0;
+		add(nickNameTextField,gc);
+		
+		gc.gridx = 1;
+		gc.gridy =1;
+		add(serverLabel,gc);
+		
+		gc.gridx =1;
+		gc.gridy =1;
+		add(serverTextField,gc);
+		
+		gc.gridx =2;
+		gc.gridy =1;
+		add(channelLabel,gc);
+		
+		gc.gridx =3;
+		gc.gridy =1;
+		add(channelTextField,gc);
+		
+		gc.gridx =4;
+		gc.gridy =0;
+		add(connectButton,gc);
+		
+		gc.gridx =5;
+		gc.gridy =0;
+		add(disconnectButton,gc);
+		
+
+		
+		
 	}
 	
 	public JLabel getUsernameLabel()

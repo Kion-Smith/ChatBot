@@ -1,3 +1,5 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,10 +17,23 @@ public class chatFrame extends JFrame implements ActionListener
 		usp = new userSettingsPanel();
 		ou = new onlineUsersPanel();
 		
+		setLayout(new GridBagLayout() );
+		GridBagConstraints gc = new GridBagConstraints();
+		gc.fill = GridBagConstraints.BOTH;
+		gc.anchor =GridBagConstraints.FIRST_LINE_START;
+		gc.gridx =0;
+		gc.gridy =0;
+		add(cp,gc);
 		
-		add(cp);
-		add(usp);
-		add(ou);
+		gc.anchor =GridBagConstraints.LAST_LINE_START;
+		gc.gridx =0;
+		gc.gridy =1;
+		add(usp,gc);
+		
+		gc.anchor =GridBagConstraints.FIRST_LINE_END;
+		gc.gridx =1;
+		gc.gridy =0;
+		add(ou,gc);
 	}
 
 	public void actionPerformed(ActionEvent e)
