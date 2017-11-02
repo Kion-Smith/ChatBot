@@ -2,11 +2,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class onlineUsers extends JPanel
+public class onlineUsersPanel extends JPanel
 {
 	JLabel usersLabel;
 	JTextArea usersTextArea;
-	public onlineUsers()
+	public onlineUsersPanel()
 	{
 		usersLabel = new JLabel("Users Online");
 		usersTextArea= new JTextArea();
