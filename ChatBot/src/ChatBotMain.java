@@ -7,7 +7,11 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
-
+/*THINGS TO DO
+ * Get two apis to use
+ * add in functionality of buttons and other junk
+ * add setters and getters for all variables
+ */
 public class ChatBotMain
 {
 	public static void main(String [] args) throws Exception
