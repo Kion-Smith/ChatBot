@@ -20,6 +20,13 @@ public class chatFrame extends JFrame implements ActionListener
 		ou = new onlineUsersPanel();
 		sp = new statusPanel();
 		
+		cp.getSendButton().addActionListener(this);
+		cp.getClearButton().addActionListener(this);
+		
+		usp.getConnectButton().addActionListener(this);
+		usp.getDisconnectButton().addActionListener(this);
+		
+		
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -50,7 +57,57 @@ public class chatFrame extends JFrame implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
+		try
+		{
+			if(e.getSource() ==usp.getConnectButton() )
+			{
+				System.out.println("Connected");
+				String userName=usp.getUsernameTextField().getText();
+				String serverName=usp.getServerTextField().getText();
+				String nickName=usp.getNicknameTextField().getText();
+				String channel=usp.getChannelTextField().getText();
+				
+			}
+			else if(e.getSource() == usp.getDisconnectButton())
+			{
+				System.out.println("Disconnected");
+			}
+			
+			if(e.getSource() == cp.getClearButton())
+			{
+				cp.getChatBoxTextArea().setText(null);
+			}
+			
+			if(e.getSource() == cp.getSendButton())
+			{
+				
+				cp.getChatBoxTextArea().setText(cp.getMessageTextArea().getText());
+				cp.getMessageTextArea().setText(null);
+				
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
 		
-		
+	}
+	
+	public String validateUsername(String un)
+	{
+		return "";
+	}
+	
+	public String validateNickname(String nn)
+	{
+		return "";
+	}
+	public String validateServer(String sn)
+	{
+		return "";
+	}
+	public String validateChannel(String cn)
+	{
+		return "";
 	}
 }

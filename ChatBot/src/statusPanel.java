@@ -27,6 +27,11 @@ public class statusPanel extends JPanel
 		currentServerTF= new JTextField(20);
 		isConnectedTF= new JTextField(20);
 		
+		currentChannelTF.setEditable(false);
+		currentServerTF.setEditable(false);
+		isConnectedTF.setEditable(false);
+		
+		
 		setBorder(statusBorder);
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();

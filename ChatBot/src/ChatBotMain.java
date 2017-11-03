@@ -24,7 +24,7 @@ public class ChatBotMain
 		chatFrame cf = new chatFrame();
 		cf.setTitle("IRC Chat");
 		cf.setSize(1000, 650);
-		//cf.setResizable(false);
+		cf.setResizable(false);
 		cf.setVisible(true);
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//b.messages(channel, reader.readLine());
