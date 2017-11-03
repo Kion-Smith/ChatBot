@@ -7,15 +7,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 public class statusPanel extends JPanel 
 {
-	JLabel currentServerLabel,isConnectedLabel,currentChannelLabel;
-	JTextField currentServerTF,isConnectedTF,currentChannelTF;
-	Border sortingBorder;
+	private JLabel currentServerLabel,isConnectedLabel,currentChannelLabel;
+	private JTextField currentServerTF,isConnectedTF,currentChannelTF;
+	private TitledBorder statusBorder;
+	
 	public statusPanel()
 	{
-		Border sortingBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "STATUS");
+		statusBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "STATUS");
 		
 		currentServerLabel = new JLabel("Current Server");
 		currentChannelLabel = new JLabel("Current Channel");
@@ -25,7 +27,7 @@ public class statusPanel extends JPanel
 		currentServerTF= new JTextField(20);
 		isConnectedTF= new JTextField(20);
 		
-		setBorder(sortingBorder);
+		setBorder(statusBorder);
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -60,4 +62,64 @@ public class statusPanel extends JPanel
 		gc.insets = new Insets(0,-80,10,10);
 		add(currentChannelTF,gc);
 	}
+	//getters
+	public JLabel getCurrentServerLabel()
+	{
+		return currentServerLabel;
+	}
+	public JLabel getCurrentChannelLabel()
+	{
+		return currentChannelLabel;
+	}
+	public JLabel getIsConnectedLabel()
+	{
+		return isConnectedLabel;
+	}
+	public JTextField getCurrentChannelTF()
+	{
+		return currentChannelTF;
+	}
+	public JTextField getCurrentServerTF()
+	{
+		return currentServerTF;
+	}
+	public JTextField getIsConnectedTFd()
+	{
+		return isConnectedTF;
+	}
+	public TitledBorder getStatusBorder()
+	{
+		return statusBorder;
+	}
+	
+	//setters
+	public void setCurrentServerLabel(JLabel j)
+	{
+		currentServerLabel = j;
+	}
+	public void setCurrentChannelLabel(JLabel j)
+	{
+		currentChannelLabel = j;
+	}
+	public void setIsConnectedLabel(JLabel j)
+	{
+		isConnectedLabel = j;
+	}
+	public void setCurrentChannelTF(JTextField j)
+	{
+		currentChannelTF = j;
+	}
+	public void setCurrentServerTF(JTextField j)
+	{
+		currentServerTF = j;
+	}
+	public void setIsConnectedTFd(JTextField j)
+	{
+		isConnectedTF = j;
+	}
+	public void getStatusBorder(TitledBorder b)
+	{
+		statusBorder= b;
+	}
+	   
 }

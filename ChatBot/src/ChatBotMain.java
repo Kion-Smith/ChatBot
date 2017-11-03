@@ -29,6 +29,7 @@ public class ChatBotMain
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//b.messages(channel, reader.readLine());
 		
+		/*
 		
 		userBot u = new userBot("Neon");
 		u.setVerbose(true);

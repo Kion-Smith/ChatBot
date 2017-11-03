@@ -13,10 +13,10 @@ import javax.swing.border.TitledBorder;
 
 public class userSettingsPanel extends JPanel
 {
-	JLabel userNameLabel,nickNameLabel,serverLabel,channelLabel;
-	JTextField userNameTextField,nickNameTextField,serverTextField,channelTextField;
-	JButton connectButton,disconnectButton;
-	TitledBorder sortingBorder;
+	private JLabel userNameLabel,nickNameLabel,serverLabel,channelLabel;
+	private JTextField userNameTextField,nickNameTextField,serverTextField,channelTextField;
+	private JButton connectButton,disconnectButton;
+	private TitledBorder userSettingsBorder;
 	
 	public userSettingsPanel()
 	{
@@ -33,9 +33,9 @@ public class userSettingsPanel extends JPanel
 		connectButton = new JButton("Connect");
 		disconnectButton = new JButton("Disconnect");
 		
-		sortingBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "LOGIN");
+		userSettingsBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "LOGIN");
 		
-		setBorder(sortingBorder);
+		setBorder(userSettingsBorder);
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -73,7 +73,7 @@ public class userSettingsPanel extends JPanel
 		gc.gridy = 2;
 		gc.gridheight = 2;
 		gc.ipadx = 100;
-		gc.insets = new Insets(15, -80, 0, 0);
+		gc.insets = new Insets(15, -80, 0, -80);
 		add(channelTextField,gc);
 		
 		gc.gridx = 2;
@@ -85,7 +85,7 @@ public class userSettingsPanel extends JPanel
 		gc.gridy = 0;
 		gc.gridheight = 2;
 		gc.ipadx = 100;
-		gc.insets = new Insets(13, -80, 0, 0);
+		gc.insets = new Insets(13, -80, 0, -80);
 		add(nickNameTextField,gc);
 		
 		gc.gridx = 4;
@@ -93,7 +93,7 @@ public class userSettingsPanel extends JPanel
 		gc.gridheight = 4;
 		gc.ipadx = 27;
 	    gc.ipady = 10;
-	    gc.insets = new Insets(0, 10, 0, 0);
+	    gc.insets = new Insets(0, 40, 0, -70);
 		add(connectButton,gc);
 		
 		gc.gridx = 4;
@@ -101,7 +101,7 @@ public class userSettingsPanel extends JPanel
 		gc.gridheight = 4;
 		gc.ipadx = 10;
 		gc.ipady = 10;
-		gc.insets = new Insets(10, 10, 10, 0);
+		gc.insets = new Insets(10, 40, 10, -70);
 		add(disconnectButton,gc);
 		
 
@@ -149,7 +149,11 @@ public class userSettingsPanel extends JPanel
 	{
 		return disconnectButton;
 	}
-	
+	public TitledBorder getUserSettingsBorder()
+	{
+		return userSettingsBorder;
+	}
+	//setters
 	public void setUsernameLabel(JLabel j)
 	{
 		userNameLabel = j;
@@ -189,5 +193,9 @@ public class userSettingsPanel extends JPanel
 	public void setDisconnectButton(JButton j)
 	{
 		 disconnectButton=j;
+	}
+	public void setUserSettingsBorder(TitledBorder b)
+	{
+		userSettingsBorder =b;
 	}
 }

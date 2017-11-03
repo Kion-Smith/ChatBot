@@ -13,10 +13,10 @@ import javax.swing.border.TitledBorder;
 
 public class chatPanel extends JPanel
 {
-	JButton sendButton, clearButton;
-	JTextArea chatBoxTextArea,messageTextArea;
-	JScrollPane chatScrollPane,messageScrollPane;//add setters and getters
-	TitledBorder sortingBorder;
+	private JButton sendButton, clearButton;
+	private JTextArea chatBoxTextArea,messageTextArea;
+	private JScrollPane chatScrollPane,messageScrollPane;//add setters and getters
+	private TitledBorder chatBorder;
 	
 	public chatPanel()
 	{
@@ -30,14 +30,14 @@ public class chatPanel extends JPanel
 		chatScrollPane = new JScrollPane(chatBoxTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		messageScrollPane = new JScrollPane(messageTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		sortingBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "CHATROOM");
+		chatBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "CHATROOM");
 
 		
 		chatBoxTextArea.setEditable(false);
 		chatBoxTextArea.setLineWrap(true);
 		messageTextArea.setLineWrap(true);
 		
-		setBorder(sortingBorder);
+		setBorder(chatBorder);
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -100,21 +100,47 @@ public class chatPanel extends JPanel
 	{
 		return messageTextArea;
 	}
+	public JScrollPane getChatScrollPane()
+	{
+		return chatScrollPane;
+	}
+	public JScrollPane getMessageScrollPane()
+	{
+		return messageScrollPane;
+	}
+	public TitledBorder getChatBorder()
+	{
+		return chatBorder;
+	}
+	
 	//Setters
 	public void setSendButton(JButton j)
 	{
-		 sendButton = j;
+		sendButton = j;
 	}
 	public void setClearButton(JButton j)
 	{
-		 clearButton=j;
+		clearButton=j;
 	}
 	public void setChatBoxTextArea(JTextArea j)
 	{
-		 chatBoxTextArea = j;
+		chatBoxTextArea = j;
 	}
 	public void setMessageTextArea(JTextArea j)
 	{
-		 messageTextArea = j;
+		messageTextArea = j;
+	}
+	
+	public void setChatScrollPane(JScrollPane j)
+	{
+		chatScrollPane = j;
+	}
+	public void setMessageScrollPane(JScrollPane j)
+	{
+		messageScrollPane = j;
+	}
+	public void setChatBorder(TitledBorder b)
+	{
+		chatBorder =b;
 	}
 }

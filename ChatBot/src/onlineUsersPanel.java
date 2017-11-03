@@ -15,11 +15,11 @@ import javax.swing.border.TitledBorder;
 
 public class onlineUsersPanel extends JPanel
 {
-	JLabel usersLabel;
-	JList usersList;
-	DefaultListModel listModel;
-	JScrollPane listScroller;
-	TitledBorder usersBorder;
+	private JLabel usersLabel;
+	private JList usersList;
+	private DefaultListModel listModel;
+	private JScrollPane userScrollPane;
+	private TitledBorder usersBorder;
 	
 	public onlineUsersPanel()
 	{
@@ -30,7 +30,7 @@ public class onlineUsersPanel extends JPanel
 		
 		listModel = new DefaultListModel();
 		usersList = new JList(listModel);
-		listScroller = new JScrollPane(usersList);
+		userScrollPane = new JScrollPane(usersList);
 		
 		setBorder(usersBorder);
 		setLayout(new GridBagLayout() );
@@ -43,27 +43,53 @@ public class onlineUsersPanel extends JPanel
 		gc.weightx = 1.0;
 		gc.weighty = 1.0;
 		gc.insets = new Insets(5, 5, 5, 5);
-        add(listScroller, gc);
+        add(userScrollPane, gc);
 		
 	}
-	public int getSize(String[] array)
-	{
-		return array.length;
-	}
-	public String getElement(String[] array, int i)
-	{
-		return array[i];
-	}
-
+	
 	public JLabel getUsersLabel()
 	{
 		return usersLabel;
 	}
+	public TitledBorder getUsersBorder()
+	{
+		return usersBorder;
+	}
+	public JScrollPane getUserScrollPane()
+	{
+		return userScrollPane;
+	}
+	public JList getUsersList()
+	{
+		return usersList;
+	}
+	public DefaultListModel getListModel()
+	{
+		return listModel;
+	}
+	
 
 	//setters
 	public void setUsersLabel(JLabel j)
 	{
 		usersLabel = j;
 	}
+	public void setUsersBorder(TitledBorder b)
+	{
+		usersBorder =b;
+	}
+	public void setUserScrollPane(JScrollPane j)
+	{
+		userScrollPane = j;
+	}
+	public void setUsersList(JList j)
+	{
+		usersList = j;
+	}
+	public void setListModel(DefaultListModel m)
+	{
+		listModel = m;
+	}
+	
 	
 }

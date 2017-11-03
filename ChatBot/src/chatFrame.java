@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 
 public class chatFrame extends JFrame implements ActionListener
 {
-	chatPanel cp;
-	userSettingsPanel usp;
-	onlineUsersPanel ou;
-	statusPanel sp;
+	private chatPanel cp;
+	private userSettingsPanel usp;
+	private onlineUsersPanel ou;
+	private statusPanel sp;
 	
 	public chatFrame()
 	{
