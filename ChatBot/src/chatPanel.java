@@ -9,24 +9,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class chatPanel extends JPanel
 {
 	JButton sendButton, clearButton;
 	JTextArea chatBoxTextArea,messageTextArea;
 	JScrollPane chatScrollPane,messageScrollPane;//add setters and getters
-	Border sortingBorder;
+	TitledBorder sortingBorder;
 	
 	public chatPanel()
 	{
 		
 		sendButton = new JButton("SEND");
 		clearButton = new JButton("CLEAR");
+		
 		chatBoxTextArea = new JTextArea(5,20);
 		messageTextArea= new JTextArea(5,20);
+		
 		chatScrollPane = new JScrollPane(chatBoxTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		messageScrollPane = new JScrollPane(messageTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		sortingBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		
+		sortingBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "CHATROOM");
+
 		
 		chatBoxTextArea.setEditable(false);
 		chatBoxTextArea.setLineWrap(true);
@@ -43,36 +48,37 @@ public class chatPanel extends JPanel
 		gc.fill = GridBagConstraints.BOTH;
 		gc.weightx = 1;
 		gc.weighty = 1;
-		gc.ipadx=309;
-		gc.ipady =239;
-		gc.insets = new Insets(13,12,0,0);
-		add(chatScrollPane,gc);//problem
-		
-		//gc = new GridBagConstraints();
+		gc.ipadx=300;
+		gc.ipady =240;
+		gc.insets = new Insets(15,15,0,0);
+		add(chatScrollPane,gc);
+
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.fill = GridBagConstraints.BOTH;
-		gc.ipadx = 309;
-		gc.ipady = 49;
+		gc.ipadx = 300;
+		gc.ipady = 50;
 		gc.anchor = GridBagConstraints.NORTHWEST;
 		gc.weightx = 1.0;
 		gc.weighty = 1.0;
-		gc.insets = new Insets(11, 12, 13, 0);
+		gc.insets = new Insets(15, 15, 15, 0);
 		add(messageScrollPane, gc);
 		
+		gc.fill = GridBagConstraints.REMAINDER;
 		gc.gridx = 1;
 		gc.gridy = 1;
-		gc.ipadx = 29;
-		gc.ipady = 49;
+		gc.ipadx = 56;
+		gc.ipady = 50;
 		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(11, 6, 13, 12);
+		gc.insets = new Insets(40, 50, -40, -50);
 		add(sendButton, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 0;
-		gc.ipadx = 29;
+		gc.ipadx = 50;
+		gc.ipady = 5;
 		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(235, 6, 0, 12);
+		gc.insets = new Insets(290, 50, -290, -50);
 	    add(clearButton, gc);
 		
 

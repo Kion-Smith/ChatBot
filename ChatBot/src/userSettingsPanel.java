@@ -9,13 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class userSettingsPanel extends JPanel
 {
 	JLabel userNameLabel,nickNameLabel,serverLabel,channelLabel;
 	JTextField userNameTextField,nickNameTextField,serverTextField,channelTextField;
 	JButton connectButton,disconnectButton;
-	Border sortingBorder;
+	TitledBorder sortingBorder;
 	
 	public userSettingsPanel()
 	{
@@ -32,7 +33,7 @@ public class userSettingsPanel extends JPanel
 		connectButton = new JButton("Connect");
 		disconnectButton = new JButton("Disconnect");
 		
-		sortingBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		sortingBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "LOGIN");
 		
 		setBorder(sortingBorder);
 		setLayout(new GridBagLayout() );
@@ -41,76 +42,67 @@ public class userSettingsPanel extends JPanel
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(16, 12, 0, 0);
+		gc.insets = new Insets(15, 15, 0, 0);
 		add(userNameLabel,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.gridheight = 2;
-		gc.ipadx = 99;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(13, 10, 0, 0);
+		gc.ipadx = 100;
+		gc.insets = new Insets(15, -70, 0, 0);
 		add(userNameTextField,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 2;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(21, 12, 0, 0);
+		gc.insets = new Insets(15, 15, 0, 0);
 		add(serverLabel,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 2;
 		gc.gridheight = 2;
-		gc.ipadx = 99;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(18, 10, 13, 0);
+		gc.ipadx = 100;
+		gc.insets = new Insets(15, -70, 0, 0);
 		add(serverTextField,gc);
 		
 		gc.gridx = 2;
 		gc.gridy = 2;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(21, 18, 0, 0);
+		gc.insets = new Insets(15, 50, 0, 0);
 		add(channelLabel,gc);
 		
 		gc.gridx = 3;
 		gc.gridy = 2;
 		gc.gridheight = 2;
-		gc.ipadx = 99;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(18, 18, 13, 0);
+		gc.ipadx = 100;
+		gc.insets = new Insets(15, -80, 0, 0);
 		add(channelTextField,gc);
 		
 		gc.gridx = 2;
 		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(16, 18, 0, 0);
+		gc.insets = new Insets(15, 50, 0, 0);
 		add(nickNameLabel,gc);
 		
 		gc.gridx = 3;
 		gc.gridy = 0;
 		gc.gridheight = 2;
-		gc.ipadx = 99;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(13, 18, 0, 0);
+		gc.ipadx = 100;
+		gc.insets = new Insets(13, -80, 0, 0);
 		add(nickNameTextField,gc);
-		
-		gc.gridx = 5;
-		gc.gridy = 0;
-		gc.gridheight = 4;
-		gc.ipadx = 30;
-	    gc.ipady = 35;
-	    gc.anchor = GridBagConstraints.NORTHWEST;
-	    gc.insets = new Insets(13, 6, 13, 26);
-		add(disconnectButton,gc);
 		
 		gc.gridx = 4;
 		gc.gridy = 0;
 		gc.gridheight = 4;
-		gc.ipadx = 30;
-		gc.ipady = 35;
-		gc.anchor =GridBagConstraints.NORTHWEST;
-		gc.insets = new Insets(13, 30, 13, 0);
+		gc.ipadx = 27;
+	    gc.ipady = 10;
+	    gc.insets = new Insets(0, 10, 0, 0);
 		add(connectButton,gc);
+		
+		gc.gridx = 4;
+		gc.gridy = 1;
+		gc.gridheight = 4;
+		gc.ipadx = 10;
+		gc.ipady = 10;
+		gc.insets = new Insets(10, 10, 10, 0);
+		add(disconnectButton,gc);
 		
 
 		
