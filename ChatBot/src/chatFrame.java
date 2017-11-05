@@ -67,6 +67,8 @@ public class chatFrame extends JFrame implements ActionListener
 				String nickName=usp.getNicknameTextField().getText();
 				String channel=usp.getChannelTextField().getText();
 				
+				
+				
 			}
 			else if(e.getSource() == usp.getDisconnectButton())
 			{
@@ -81,7 +83,7 @@ public class chatFrame extends JFrame implements ActionListener
 			if(e.getSource() == cp.getSendButton())
 			{
 				
-				cp.getChatBoxTextArea().setText(cp.getMessageTextArea().getText());
+				cp.getChatBoxTextArea().append(cp.getMessageTextArea().getText() +"\n");
 				cp.getMessageTextArea().setText(null);
 				
 			}
@@ -109,5 +111,10 @@ public class chatFrame extends JFrame implements ActionListener
 	public String validateChannel(String cn)
 	{
 		return "";
+	}
+	
+	public boolean userInformation(String un,String nn, String sn, String cn)
+	{
+		return false;
 	}
 }
