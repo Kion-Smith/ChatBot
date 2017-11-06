@@ -33,6 +33,11 @@ public class userSettingsPanel extends JPanel
 		connectButton = new JButton("Connect");
 		disconnectButton = new JButton("Disconnect");
 		
+		userNameTextField.setText("TestGuest");
+		nickNameTextField.setText("KionsTestGuest");
+		serverTextField.setText("irc.freenode.net");
+		channelTextField.setText("#KionsChatTestRoom");
+		
 		userSettingsBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "LOGIN");
 		
 		setBorder(userSettingsBorder);
