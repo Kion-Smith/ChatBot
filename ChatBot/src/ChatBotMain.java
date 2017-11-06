@@ -14,12 +14,13 @@ import javax.swing.JFrame;
  */
 public class ChatBotMain
 {
+	static String lineTest;
 	public static void main(String [] args) throws Exception
 	{
 		
-		String channel = "#KionsChatTestRoom";
+		String channel = "#KionsTestChatRoom";
 		String server  = "irc.freenode.net";
-		//Socket socket = new Socket(server, 6667);
+		Socket socket = new Socket(server, 6667);
 		
 		chatFrame cf = new chatFrame();
 		cf.setTitle("IRC Chat");
@@ -29,19 +30,20 @@ public class ChatBotMain
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//b.messages(channel, reader.readLine());
 		
+	
 		/*
-		
-		userBot u = new userBot("Neon");
+		userBot u = new userBot("MyNameJeff");
 		u.setVerbose(true);
 		u.connect("irc.freenode.net");
 		u.joinChannel(channel);
-		
+		Not needed
+		*/
 		MyBot b = new MyBot();
 		b.setVerbose(true);
 		b.connect("irc.freenode.net");
 		b.joinChannel(channel);
 		//sends current time
-		
+			/*
 		
 		b.onMessage("#KionsChatTestRoom",  "Kion", "test",  "user",  "time");
 		
@@ -67,15 +69,18 @@ public class ChatBotMain
         
         // Connect directly to the IRC server.
         
-      //  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
+      //  
         PrintWriter writer = new PrintWriter(socket.getOutputStream(),true );
         BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
-        
+         */
+		
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
+		BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
         // Log on to the server.
-        writer.write("NICK " + nick + "\r\n");
-        writer.write("USER " + login + " 8 * : Java IRC Hacks Bot\r\n");
+        writer.write("NICK " + "other" + "\r\n");
+        writer.write("USER " + "other123" + " 8 * : Java IRC Hacks Bot\r\n");
         writer.flush( );
-        
+       
         // Read lines from the server until it tells us we have connected.
         String line = null;
         while ((line = reader.readLine( )) != null)
@@ -93,35 +98,62 @@ public class ChatBotMain
             
         }
         
-        // Join the channel.
+        //  
+		///Join the channel.
+		
         writer.write("JOIN " + channel + "\r\n");
         writer.flush( );
         
         // Keep reading lines from the server.
+         
+        
+		
+		 line = null;
+		 
+			
         while ((line = reader.readLine( )) != null) 
         {
+        	
+        	System.out.println(line);
+        	if(line.contains("!") && line.contains("JOIN"))
+        	{
+        		String userName = line.substring(0+1,line.indexOf("!"));
+        		String newMes = "<"+userName+"> joined "+ channel;
+        		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
+        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
+        	}
+        	if(line.contains("!") && line.contains("MSG"))
+        	{
+        		String userName = line.substring(0 +1,line.indexOf("!"));
+        		String message = line.substring(line.indexOf(" :"));
+        		String newMes = "<"+userName+">"+message;
+        		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
+        		 sendString(writer,"PRIVMSG "+channel+" :"+"I hate you");
+        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
+        	}
+        	
+        	//setLine(line);
+        	/*
         	if(line.contains("Hello"))
         	{
         		Scanner kb = new Scanner(System.in);
         		System.out.println("tp message");
-        		line = kb.nextLine();
-        		writer.write(line);
-        		writer.flush();
-        	}
-            if (line.toLowerCase( ).startsWith("PING "))
-            {
-                // We must respond to PINGs to avoid being disconnected.
-                writer.write("PONG " + line.substring(5) + "\r\n");
-                writer.write("PRIVMSG " + channel + " :I got pinged!\r\n");
-                writer.flush( );
-            }
-            else {
-                // Print the raw line received by the bot.
-                System.out.println(line);
-            }
-        }*/
+        		//line = kb.nextLine();
+        		System.out.println(line);
+        		
+        	}*/
+         
+        }
     }
-		
+	static void sendString(BufferedWriter bw, String str) {
+	    try {
+	      bw.write(str + "\r\n");
+	      bw.flush();
+	    }
+	    catch (Exception e) {
+	      System.out.println("Exception: "+e);
+	    }
+	  }
 	
 	
 }

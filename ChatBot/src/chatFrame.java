@@ -53,6 +53,8 @@ public class chatFrame extends JFrame implements ActionListener
 		gc.gridx =1;
 		gc.gridy =1;
 		add(sp,gc);
+		
+		
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -87,6 +89,7 @@ public class chatFrame extends JFrame implements ActionListener
 				cp.getMessageTextArea().setText(null);
 				
 			}
+			
 		}
 		catch(Exception ex)
 		{
@@ -116,5 +119,10 @@ public class chatFrame extends JFrame implements ActionListener
 	public boolean userInformation(String un,String nn, String sn, String cn)
 	{
 		return false;
+	}
+	
+	public chatPanel getChatPanel()
+	{
+		return cp;
 	}
 }
