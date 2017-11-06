@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 public class ChatBotMain
 {
 	static String lineTest;
+	public static BufferedWriter writer;
 	public static void main(String [] args) throws Exception
 	{
 		
@@ -27,6 +28,7 @@ public class ChatBotMain
 		cf.setSize(1000, 650);
 		cf.setResizable(false);
 		cf.setVisible(true);
+		cf.setLocationRelativeTo(null);
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//b.messages(channel, reader.readLine());
 		
@@ -74,11 +76,11 @@ public class ChatBotMain
         BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
          */
 		
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
+		writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
 		BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
         // Log on to the server.
         writer.write("NICK " + "other" + "\r\n");
-        writer.write("USER " + "other123" + " 8 * : Java IRC Hacks Bot\r\n");
+        writer.write("USER " + "other" + " 8 * : Java IRC Hacks Bot\r\n");
         writer.flush( );
        
         // Read lines from the server until it tells us we have connected.
@@ -98,7 +100,8 @@ public class ChatBotMain
             
         }
         
-        //  
+        //  sendString(writer,"PRIVMSG "+channel+" :"+cf.getChatPanel().getMessageTextArea().getText()+"\n");
+        
 		///Join the channel.
 		
         writer.write("JOIN " + channel + "\r\n");
@@ -106,11 +109,9 @@ public class ChatBotMain
         
         // Keep reading lines from the server.
          
-        
-		
-		 line = null;
-		 
-			
+       // String meme = "USERS " + channel + "\r\n";
+        //writer.write(meme);
+		 line = null;	
         while ((line = reader.readLine( )) != null) 
         {
         	
@@ -128,12 +129,26 @@ public class ChatBotMain
         		String message = line.substring(line.indexOf(" :"));
         		String newMes = "<"+userName+">"+message;
         		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
-        		 sendString(writer,"PRIVMSG "+channel+" :"+"I hate you");
-        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
+        		
+        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");  
         	}
+        	if(line.contains("353") && line.contains("@ "+channel))
+        	{
+        		String usersOnline = line.substring((line.indexOf("@ #KionsTestChatRoom :")));
+        		usersOnline = usersOnline.substring(usersOnline.indexOf(":")+1);
+        		while(!usersOnline.equals(""))
+        		{
+        			usersOnline =usersOnline.substring(0,usersOnline.indexOf(" "));
+        			System.out.println(usersOnline);
+        			usersOnline =usersOnline.substring(usersOnline.indexOf(" "));
+        		}
+        	}
+        	
+
         	
         	//setLine(line);
         	/*
+        	 * USERS
         	if(line.contains("Hello"))
         	{
         		Scanner kb = new Scanner(System.in);

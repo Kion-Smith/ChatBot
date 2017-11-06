@@ -13,6 +13,7 @@ public class chatFrame extends JFrame implements ActionListener
 	private onlineUsersPanel ou;
 	private statusPanel sp;
 	
+	
 	public chatFrame()
 	{
 		cp = new chatPanel();
@@ -84,9 +85,13 @@ public class chatFrame extends JFrame implements ActionListener
 			
 			if(e.getSource() == cp.getSendButton())
 			{
-				
-				cp.getChatBoxTextArea().append(cp.getMessageTextArea().getText() +"\n");
-				cp.getMessageTextArea().setText(null);
+				if(!(cp.getMessageTextArea().getText().equals("")))
+				{
+					String temp = "#KionsTestChatRoom";
+        			ChatBotMain.sendString(ChatBotMain.writer,"PRIVMSG "+temp+" :"+cp.getMessageTextArea().getText()+"\n");
+					cp.getChatBoxTextArea().append("<"+"other"+">"+cp.getMessageTextArea().getText() +"\n");
+					cp.getMessageTextArea().setText(null);
+				}
 				
 			}
 			
@@ -124,5 +129,9 @@ public class chatFrame extends JFrame implements ActionListener
 	public chatPanel getChatPanel()
 	{
 		return cp;
+	}
+	public onlineUsersPanel getOnlineUsersPanel()
+	{
+		return ou;
 	}
 }
