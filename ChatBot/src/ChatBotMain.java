@@ -136,27 +136,12 @@ public class ChatBotMain
         	{
         		String usersOnline = line.substring((line.indexOf("@ #KionsTestChatRoom :")));
         		usersOnline = usersOnline.substring(usersOnline.indexOf(":")+1);
-        		while(!usersOnline.equals(""))
-        		{
-        			usersOnline =usersOnline.substring(0,usersOnline.indexOf(" "));
-        			System.out.println(usersOnline);
-        			usersOnline =usersOnline.substring(usersOnline.indexOf(" "));
-        		}
-        	}
-        	
-
-        	
-        	//setLine(line);
-        	/*
-        	 * USERS
-        	if(line.contains("Hello"))
-        	{
-        		Scanner kb = new Scanner(System.in);
-        		System.out.println("tp message");
-        		//line = kb.nextLine();
-        		System.out.println(line);
         		
-        	}*/
+        		System.out.println(usersOnline);
+
+  
+        	}
+
          
         }
     }
