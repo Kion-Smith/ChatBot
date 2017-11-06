@@ -109,8 +109,8 @@ public class ChatBotMain
         
         // Keep reading lines from the server.
          
-       // String meme = "USERS " + channel + "\r\n";
-        //writer.write(meme);
+        String meme = "NAMES " + channel + "\r\n";
+        writer.write(meme +"xD");
 		 line = null;	
         while ((line = reader.readLine( )) != null) 
         {
@@ -136,8 +136,15 @@ public class ChatBotMain
         	{
         		String usersOnline = line.substring((line.indexOf("@ #KionsTestChatRoom :")));
         		usersOnline = usersOnline.substring(usersOnline.indexOf(":")+1);
+
+        		String[] usersListString = usersOnline.split(" ");
         		
-        		System.out.println(usersOnline);
+        		for(int i =0;i<usersListString.length;i++)
+        		{
+        			System.out.println(usersListString[i]);
+        			cf.getOnlineUsersPanel().getListModel().addElement(usersListString[i]);
+        		}
+        		cf.getOnlineUsersPanel().getListModel().addElement(b.getName());
 
   
         	}
@@ -145,8 +152,10 @@ public class ChatBotMain
          
         }
     }
-	static void sendString(BufferedWriter bw, String str) {
-	    try {
+	static void sendString(BufferedWriter bw, String str) 
+	{
+	    try 
+	    {
 	      bw.write(str + "\r\n");
 	      bw.flush();
 	    }

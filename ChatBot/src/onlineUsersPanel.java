@@ -28,7 +28,7 @@ public class onlineUsersPanel extends JPanel
 		
 		usersLabel = new JLabel("Users Online");
 		
-		listModel = new DefaultListModel();
+		listModel = new DefaultListModel();//need to change to text area
 		usersList = new JList(listModel);
 		userScrollPane = new JScrollPane(usersList);
 		
