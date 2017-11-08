@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -19,10 +21,12 @@ import javax.swing.JFrame;
  */
 public class ChatBotMain
 {
+	static LinkedList<String> currentUsers;
 	static String lineTest;
 	public static BufferedWriter writer;
 	public static void main(String [] args) throws Exception
 	{
+		currentUsers = new LinkedList<String>();
 		
 		String channel = "#KionsTestChatRoom";
 		String server  = "irc.freenode.net";
@@ -37,14 +41,6 @@ public class ChatBotMain
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//b.messages(channel, reader.readLine());
 		
-	
-		/*
-		userBot u = new userBot("MyNameJeff");
-		u.setVerbose(true);
-		u.connect("irc.freenode.net");
-		u.joinChannel(channel);
-		Not needed
-		*/
 		MyBot b = new MyBot();
 		b.setVerbose(true);
 		b.connect("irc.freenode.net");
@@ -65,27 +61,13 @@ public class ChatBotMain
 		//b.setVerbose(true);
 		//b.joinChannel(channel);
 	
-		
-		/*
-        String nick = "person1";
-        String login = "TestPeople";
-
-
-        // The channel which the bot will join.
-      //  String channel = "#irchacks";
-        
-        // Connect directly to the IRC server.
-        
-      //  
-        PrintWriter writer = new PrintWriter(socket.getOutputStream(),true );
-        BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
-         */
+*/
 		
 		writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
 		BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
         // Log on to the server.
-        writer.write("NICK " + "other" + "\r\n");
-        writer.write("USER " + "other" + " 8 * : Java IRC Hacks Bot\r\n");
+        writer.write("NICK " + "otherPerson123" + "\r\n");
+        writer.write("USER " + "otherPerson123" + " 8 * : Java IRC Hacks Bot\r\n");
         writer.flush( );
        
         // Read lines from the server until it tells us we have connected.
@@ -114,11 +96,10 @@ public class ChatBotMain
         
         // Keep reading lines from the server.
          
-        String meme = "NAMES " + channel + "\r\n";
-        writer.write(meme +"xD");
-		 line = null;	
+       
         while ((line = reader.readLine( )) != null) 
         {
+        	
         	
         	System.out.println(line);
         	if(line.contains("!") && line.contains("JOIN"))
@@ -126,6 +107,13 @@ public class ChatBotMain
         		String userName = line.substring(0+1,line.indexOf("!"));
         		String newMes = "<"+userName+"> joined "+ channel;
         		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
+        		
+        		if(!currentUsers.contains(userName) )
+    			{
+    				currentUsers.add(userName);
+    				//cf.getOnlineUsersPanel().getListModel().addElement(userName);
+    				System.out.println(userName +"...................");
+    			}
         		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
         	}
         	if(line.contains("!") && line.contains("MSG"))
@@ -147,12 +135,36 @@ public class ChatBotMain
         		for(int i =0;i<usersListString.length;i++)
         		{
         			System.out.println(usersListString[i]);
-        			cf.getOnlineUsersPanel().getListModel().addElement(usersListString[i]);
+        			if(!currentUsers.contains(usersListString[i]) )
+        			{
+        				currentUsers.add(usersListString[i]);
+        				cf.getOnlineUsersPanel().getListModel().addElement( usersListString[i] );
+        				
+        				System.out.println(usersListString[i] +"...................");
+        			}
+        			//cf.getOnlineUsersPanel().getListModel().addElement(usersListString[i]);
         		}
-        		cf.getOnlineUsersPanel().getListModel().addElement(b.getName());
+        		
+        		/*
+        		for(int i =0;i<currentUsers.size();i++)
+        		{
+        			System.out.println(currentUsers.get(i) +"IN THE LIST");
+        			cf.getOnlineUsersPanel().getListModel().addElement( currentUsers.get(i) );
+        		}*/
+        			//cf.getOnlineUsersPanel().getListModel().addElement(b.getName());
+        		
 
   
         	}
+        	
+        	else
+    		{
+    			for(int i =0;i<currentUsers.size();i++)
+        		{
+        			System.out.println(currentUsers.get(i) +"IN THE LIST");
+        			cf.getOnlineUsersPanel().getListModel().addElement( currentUsers.get(i) );
+        		}
+    		}
 
          
         }
