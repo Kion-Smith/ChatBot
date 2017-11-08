@@ -9,8 +9,13 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 /*THINGS TO DO
  * Get two apis to use
- * add in functionality of buttons and other junk
- * add setters and getters for all variables
+ * regex for finding patterns within api 
+ * images dont work
+ * open weather is good one,try
+ * ADD GSON
+ * 
+ * goo.gl/v8dPyY
+ * https://docs.google.com/presentation/d/1KRw7n8qOwK-k5XPZDqUCaAD33X0n7W1E048YRYvlDRw/edit#slide=id.g2a9e3de2a4_0_0
  */
 public class ChatBotMain
 {
