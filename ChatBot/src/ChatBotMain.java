@@ -99,7 +99,7 @@ public class ChatBotMain
        
         while ((line = reader.readLine( )) != null) 
         {
-        	
+        	int temp = 1;
         	
         	System.out.println(line);
         	if(line.contains("!") && line.contains("JOIN"))
@@ -138,26 +138,30 @@ public class ChatBotMain
         			if(!currentUsers.contains(usersListString[i]) )
         			{
         				currentUsers.add(usersListString[i]);
-        				cf.getOnlineUsersPanel().getListModel().addElement( usersListString[i] );
+        				//cf.getOnlineUsersPanel().getListModel().addElement( usersListString[i] );
         				
         				System.out.println(usersListString[i] +"...................");
         			}
         			//cf.getOnlineUsersPanel().getListModel().addElement(usersListString[i]);
         		}
         		
-        		/*
-        		for(int i =0;i<currentUsers.size();i++)
+        		temp = 0;
+        		if(temp == 0)
         		{
-        			System.out.println(currentUsers.get(i) +"IN THE LIST");
-        			cf.getOnlineUsersPanel().getListModel().addElement( currentUsers.get(i) );
-        		}*/
+        			for(int i =0;i<currentUsers.size();i++)
+        			{
+        				System.out.println(currentUsers.get(i) +"IN THE LIST");
+        				cf.getOnlineUsersPanel().getListModel().addElement( currentUsers.get(i) );
+        			}
+        		}
+        			
         			//cf.getOnlineUsersPanel().getListModel().addElement(b.getName());
         		
 
   
         	}
         	
-        	else
+        	if(true)
     		{
     			for(int i =0;i<currentUsers.size();i++)
         		{
