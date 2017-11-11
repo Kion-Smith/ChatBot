@@ -21,12 +21,12 @@ import javax.swing.JFrame;
  */
 public class ChatBotMain
 {
-	static LinkedList<String> currentUsers;
+	static ArrayList<String> currentUsers;
 	static String lineTest;
 	public static BufferedWriter writer;
 	public static void main(String [] args) throws Exception
 	{
-		currentUsers = new LinkedList<String>();
+		currentUsers = new ArrayList<String>();
 		
 		String channel = "#KionsTestChatRoom";
 		String server  = "irc.freenode.net";
@@ -99,21 +99,45 @@ public class ChatBotMain
        
         while ((line = reader.readLine( )) != null) 
         {
-        	int temp = 1;
+        ///	System.out.println( b.getUsers(channel) );
         	
-        	System.out.println(line);
+        	
+        	//System.out.println(line);
         	if(line.contains("!") && line.contains("JOIN"))
         	{
+        		
         		String userName = line.substring(0+1,line.indexOf("!"));
         		String newMes = "<"+userName+"> joined "+ channel;
+        		//System.out.println(userName+"------------------------");
         		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
         		
         		if(!currentUsers.contains(userName) )
     			{
     				currentUsers.add(userName);
+    				cf.getOnlineUsersPanel().getUsersOnline().append(userName+"\n");
     				//cf.getOnlineUsersPanel().getListModel().addElement(userName);
-    				System.out.println(userName +"...................");
+    				
     			}
+        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
+        	}
+        	if(line.contains("!") && (line.contains("LEAVE") || line.contains("QUIT")) )
+        	{
+        		String userName = line.substring(0+1,line.indexOf("!"));
+        		String newMes = "<"+userName+"> Left "+ channel;
+        		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
+        		
+        		
+    			currentUsers.remove(userName);
+    			
+    			cf.getOnlineUsersPanel().getUsersOnline().setText(null);
+    			for(int i =0;i<currentUsers.size();i++)
+    			{
+    				System.out.print(currentUsers.get(i));
+    				cf.getOnlineUsersPanel().getUsersOnline().append( currentUsers.get(i)+"\n");
+    			}
+    			
+    			//cf.getOnlineUsersPanel().getListModel().removeElement(userName);
+    				
         		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
         	}
         	if(line.contains("!") && line.contains("MSG"))
@@ -134,26 +158,20 @@ public class ChatBotMain
         		
         		for(int i =0;i<usersListString.length;i++)
         		{
-        			System.out.println(usersListString[i]);
-        			if(!currentUsers.contains(usersListString[i]) )
+        			//System.out.println(usersListString[i]);
+        			if(!currentUsers.contains(usersListString[i]+"") )
         			{
-        				currentUsers.add(usersListString[i]);
+        				cf.getOnlineUsersPanel().getUsersOnline().append(usersListString[i]+"\n");
+        				currentUsers.add(usersListString[i]+"");
         				//cf.getOnlineUsersPanel().getListModel().addElement( usersListString[i] );
         				
-        				System.out.println(usersListString[i] +"...................");
         			}
         			//cf.getOnlineUsersPanel().getListModel().addElement(usersListString[i]);
         		}
         		
-        		temp = 0;
-        		if(temp == 0)
-        		{
-        			for(int i =0;i<currentUsers.size();i++)
-        			{
-        				System.out.println(currentUsers.get(i) +"IN THE LIST");
-        				cf.getOnlineUsersPanel().getListModel().addElement( currentUsers.get(i) );
-        			}
-        		}
+        		
+        		
+        		
         			
         			//cf.getOnlineUsersPanel().getListModel().addElement(b.getName());
         		
@@ -161,15 +179,6 @@ public class ChatBotMain
   
         	}
         	
-        	if(true)
-    		{
-    			for(int i =0;i<currentUsers.size();i++)
-        		{
-        			System.out.println(currentUsers.get(i) +"IN THE LIST");
-        			cf.getOnlineUsersPanel().getListModel().addElement( currentUsers.get(i) );
-        		}
-    		}
-
          
         }
     }

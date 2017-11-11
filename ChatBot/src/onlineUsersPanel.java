@@ -20,6 +20,7 @@ public class onlineUsersPanel extends JPanel
 	private DefaultListModel listModel;
 	private JScrollPane userScrollPane;
 	private TitledBorder usersBorder;
+	private JTextArea usersOnline;
 	
 	public onlineUsersPanel()
 	{
@@ -28,9 +29,13 @@ public class onlineUsersPanel extends JPanel
 		
 		usersLabel = new JLabel("Users Online");
 		
+		usersOnline = new JTextArea(5,20);
+		usersOnline.setEditable(false);
+		userScrollPane = new JScrollPane(usersOnline);
+		
 		listModel = new DefaultListModel();//need to change to text area
 		usersList = new JList(listModel);
-		userScrollPane = new JScrollPane(usersList);
+		//userScrollPane = new JScrollPane(usersList);
 		
 		setBorder(usersBorder);
 		setLayout(new GridBagLayout() );
@@ -66,6 +71,10 @@ public class onlineUsersPanel extends JPanel
 	public DefaultListModel getListModel()
 	{
 		return listModel;
+	}
+	public JTextArea getUsersOnline()
+	{
+		return usersOnline;
 	}
 	
 
