@@ -40,29 +40,13 @@ public class ChatBotMain
 		cf.setVisible(true);
 		cf.setLocationRelativeTo(null);
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//b.messages(channel, reader.readLine());
+
 		
 		MyBot b = new MyBot();
 		b.setVerbose(true);
 		b.connect("irc.freenode.net");
 		b.joinChannel(channel);
-		//sends current time
-			/*
-		
-		b.onMessage("#KionsChatTestRoom",  "Kion", "test",  "user",  "time");
-		
-		
-		//if(reader.equals(""))
-		//{
-			
-		//}
 	
-		
-		//MyBot b = new MyBot();
-		//b.setVerbose(true);
-		//b.joinChannel(channel);
-	
-*/
 		
 		writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
 		BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
@@ -91,6 +75,8 @@ public class ChatBotMain
         //  sendString(writer,"PRIVMSG "+channel+" :"+cf.getChatPanel().getMessageTextArea().getText()+"\n");
         
 		///Join the channel.
+        weatherAPI weather= new weatherAPI();
+		System.out.println(weather.webRequest("Dallas"));
 		
         writer.write("JOIN " + channel + "\r\n");
         writer.flush( );
