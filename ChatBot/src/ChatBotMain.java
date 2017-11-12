@@ -27,11 +27,11 @@ public class ChatBotMain
 	public static BufferedWriter writer;
 	public static void main(String [] args) throws Exception
 	{
-		currentUsers = new ArrayList<String>();
+	//	currentUsers = new ArrayList<String>();
 		
-		String channel = "#KionsTestChatRoom";
-		String server  = "irc.freenode.net";
-		Socket socket = new Socket(server, 6667);
+		//String channel = "#KionsTestChatRoom";
+		//String server  = "irc.freenode.net";
+		
 		
 		chatFrame cf = new chatFrame();
 		cf.setTitle("IRC Chat");
@@ -42,18 +42,36 @@ public class ChatBotMain
 		cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		
-		MyBot b = new MyBot();
-		b.setVerbose(true);
-		b.connect("irc.freenode.net");
-		b.joinChannel(channel);
-		b.onMessage(channel,b.getName(),"a","meme","!help");
-	
+       //  Log on to the server.
+		boolean isRunning = true;
+		int ran =0;
 		
-		writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
-		BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
-        // Log on to the server.
-        writer.write("NICK " + "otherPerson123" + "\r\n");
-        writer.write("USER " + "otherPerson123" + " 8 * : Java IRC Hacks Bot\r\n");
+		while(isRunning)
+		{
+			System.out.print("");
+		if(cf.getIsPressed())
+		{
+			ran =1;
+			String username =cf.getUserSettingsPanel().getUsernameTextField().getText();
+			String nickname  = cf.getUserSettingsPanel().getNicknameTextField().getText();
+			String channel = cf.getUserSettingsPanel().getChannelTextField().getText();
+			String server  = cf.getUserSettingsPanel().getServerTextField().getText();
+			
+			Socket socket = new Socket(server, 6667);
+			MyBot b = new MyBot();
+			b.setVerbose(true);
+			b.connect("irc.freenode.net");
+			b.joinChannel(channel);
+			b.onMessage(channel,b.getName(),"KionsBot","Kion","!help");
+			
+			
+			writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
+			BufferedReader reader = new BufferedReader(new InputStreamReader( socket.getInputStream() ) );
+			
+			//System.out.println("isa");
+		currentUsers = new ArrayList<String>();
+        writer.write("NICK " + username + "\r\n");
+        writer.write("USER " + nickname + " 8 * : Java IRC Hacks Bot\r\n");
         writer.flush( );
        
         // Read lines from the server until it tells us we have connected.
@@ -86,7 +104,9 @@ public class ChatBotMain
         while ((line = reader.readLine( )) != null) 
         {
         ///	System.out.println( b.getUsers(channel) );
-        	
+        	cf.getStatusPanel().getCurrentChannelTF().setText(channel);
+        	cf.getStatusPanel().getCurrentServerTF().setText(server);
+        	cf.getStatusPanel().getIsConnectedTFd().setText("Online");
         	
         	//System.out.println(line);
         	if(line.contains("!") && line.contains("JOIN"))
@@ -108,7 +128,10 @@ public class ChatBotMain
         		String userName = line.substring(0+1,line.indexOf("!"));
         		String newMes = "<"+userName+"> Left "+ channel;
         		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
-        		
+        		if(username.equals(userName))
+        		{
+        			b.quitServer();
+        		}
         		
     			currentUsers.remove(userName);
     			
@@ -130,7 +153,7 @@ public class ChatBotMain
         	}
         	if(line.contains("353") && line.contains("@ "+channel))
         	{
-        		String usersOnline = line.substring((line.indexOf("@ #KionsTestChatRoom :")));
+        		String usersOnline = line.substring((line.indexOf("@ "+channel+" :")));
         		usersOnline = usersOnline.substring(usersOnline.indexOf(":")+1);
 
         		String[] usersListString = usersOnline.split(" ");
@@ -150,10 +173,25 @@ public class ChatBotMain
 
   
         	}
-        	
+        
          
-        }
+        }	
+		}//end if
+		else if(!cf.getIsPressed() && ran>0)
+		{
+			for(int i =0;i<currentUsers.size();i++)
+			{
+				currentUsers.remove(i);
+			}
+			cf.getOnlineUsersPanel().getUsersOnline().setText(null);
+			cf.getStatusPanel().getCurrentChannelTF().setText("Not Connected");
+			cf.getStatusPanel().getCurrentServerTF().setText("Not Connected");
+			cf.getStatusPanel().getIsConnectedTFd().setText("Offline");
+		}//end else
+		}
     }
+	
+	
 	static void sendString(BufferedWriter bw, String str) 
 	{
 	    try 

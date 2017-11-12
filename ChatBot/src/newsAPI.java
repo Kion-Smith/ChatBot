@@ -125,7 +125,6 @@ public class newsAPI
 			}
 		}
 		
-		
 		return "Invalid input";
 		
 	}

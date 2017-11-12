@@ -13,7 +13,14 @@ public class chatFrame extends JFrame implements ActionListener
 	private onlineUsersPanel ou;
 	private statusPanel sp;
 	
+	public static boolean  pressed;//need to fix
 	
+	
+	String userName="";
+	String serverName="";
+	String nickName="";
+	String channel="";
+	private String setNickname;
 	public chatFrame()
 	{
 		cp = new chatPanel();
@@ -60,22 +67,33 @@ public class chatFrame extends JFrame implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
+		
+		
 		try
 		{
 			if(e.getSource() ==usp.getConnectButton() )
 			{
 				System.out.println("Connected");
-				String userName=usp.getUsernameTextField().getText();
-				String serverName=usp.getServerTextField().getText();
-				String nickName=usp.getNicknameTextField().getText();
-				String channel=usp.getChannelTextField().getText();
-				
-				
+				//isPressed = true;
+				 setUsername(usp.getUsernameTextField().getText() );
+				 setServer(usp.getServerTextField().getText() );
+				 setNickname(usp.getNicknameTextField().getText());
+				 setChannel(usp.getChannelTextField().getText());
+				setIsPressed(true);
+				//isPressed = false;
 				
 			}
 			else if(e.getSource() == usp.getDisconnectButton())
 			{
-				System.out.println("Disconnected");
+				
+				ou.getUsersOnline().setText(null);
+				
+				ChatBotMain.sendString(ChatBotMain.writer,"QUIT "+cp.getMessageTextArea().getText()+"\n");
+				setIsPressed(false);
+				sp.getCurrentChannelTF().setText("Not Connected");
+				sp.getCurrentServerTF().setText("Not Connected");
+				sp.getIsConnectedTFd().setText("Offline");
+				
 			}
 			
 			if(e.getSource() == cp.getClearButton())
@@ -87,9 +105,9 @@ public class chatFrame extends JFrame implements ActionListener
 			{
 				if(!(cp.getMessageTextArea().getText().equals("")))
 				{
-					String temp = "#KionsTestChatRoom";
-        			ChatBotMain.sendString(ChatBotMain.writer,"PRIVMSG "+temp+" :"+cp.getMessageTextArea().getText()+"\n");
-					cp.getChatBoxTextArea().append("<"+"other"+">"+cp.getMessageTextArea().getText() +"\n");
+					//String temp = "#KionsTestChatRoom";
+        			ChatBotMain.sendString(ChatBotMain.writer,"PRIVMSG "+channel+" :"+cp.getMessageTextArea().getText()+"\n");
+					cp.getChatBoxTextArea().append("<"+userName+">"+cp.getMessageTextArea().getText() +"\n");
 					cp.getMessageTextArea().setText(null);
 				}
 				
@@ -102,23 +120,32 @@ public class chatFrame extends JFrame implements ActionListener
 		}
 		
 	}
+
 	
-	public String validateUsername(String un)
+	public boolean getIsPressed()
 	{
-		return "";
+		return pressed;
+	}
+	public void setIsPressed(boolean b)
+	{
+		pressed =b;
+	}
+	public void setUsername(String un)
+	{
+		userName = un;
 	}
 	
-	public String validateNickname(String nn)
+	public void setNickname(String nn)
 	{
-		return "";
+		nickName = nn;
 	}
-	public String validateServer(String sn)
+	public void setServer(String sn)
 	{
-		return "";
+		serverName = sn;
 	}
-	public String validateChannel(String cn)
+	public void setChannel(String cn)
 	{
-		return "";
+		channel = cn;
 	}
 	
 	public boolean userInformation(String un,String nn, String sn, String cn)
@@ -133,5 +160,13 @@ public class chatFrame extends JFrame implements ActionListener
 	public onlineUsersPanel getOnlineUsersPanel()
 	{
 		return ou;
+	}
+	public userSettingsPanel getUserSettingsPanel()
+	{
+		return usp;
+	}
+	public statusPanel getStatusPanel()
+	{
+		return sp;
 	}
 }

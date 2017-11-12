@@ -1,7 +1,3 @@
-//Test class
-
-import java.util.ArrayList;
-
 import org.jibble.pircbot.*;
 
 public class MyBot extends PircBot

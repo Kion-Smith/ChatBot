@@ -29,7 +29,7 @@ public class statusPanel extends JPanel
 		
 		currentChannelTF.setText("No Channel");
 		currentServerTF.setText("No Server");
-		isConnectedTF.setText("Not Connected");
+		isConnectedTF.setText("Offline");
 		
 		currentChannelTF.setEditable(false);
 		currentServerTF.setEditable(false);
@@ -60,11 +60,11 @@ public class statusPanel extends JPanel
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.insets = new Insets(0,-80,10,10);
-		add(currentServerTF,gc);
+		add(isConnectedTF,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 1;
-		add(isConnectedTF,gc);
+		add(currentServerTF,gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 2;
