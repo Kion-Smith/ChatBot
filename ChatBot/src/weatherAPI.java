@@ -35,7 +35,7 @@ public class weatherAPI
 			}
 			rd.close();
 			
-			String weather = parseJson(result.toString(),city);
+			String weather = parseJson(result.toString());
 			return weather;
 		}
 		catch(Exception e)
@@ -47,18 +47,21 @@ public class weatherAPI
 
 	}
 	
-	public String parseJson(String json,String city)
+	public String parseJson(String json)
 	{
 		JsonElement jelement = new JsonParser().parse(json);
 		JsonObject MasterWeatherObject = jelement.getAsJsonObject();
 		
+		JsonObject weatherObject  = MasterWeatherObject.getAsJsonObject();
+		String city = weatherObject.get("name").getAsString();
+		
 		JsonObject sysObject = MasterWeatherObject.getAsJsonObject("sys");
 		String country= sysObject.get("country").getAsString();
 		
-		JsonObject weatherObject = MasterWeatherObject.getAsJsonObject();
-		JsonArray jarray = weatherObject.getAsJsonArray("weather");
-		weatherObject =jarray.get(0).getAsJsonObject();
-		String weatherType = weatherObject.get("description").getAsString();
+		JsonObject weatherTypeObject = MasterWeatherObject.getAsJsonObject();
+		JsonArray jarray = weatherTypeObject.getAsJsonArray("weather");
+		weatherTypeObject =jarray.get(0).getAsJsonObject();
+		String weatherType = weatherTypeObject.get("description").getAsString();
 		
 		JsonObject windObject = MasterWeatherObject.getAsJsonObject("wind");
 		double speed= windObject.get("speed").getAsDouble();
@@ -73,7 +76,7 @@ public class weatherAPI
 		lowTemp = convertKtoF(lowTemp);
 		maxTemp = convertKtoF(maxTemp);
 			
-		return "The temperature in "+city+","+country+" it is "+curTemp+"c with "+ weatherType+". The low is "+lowTemp+"c with a high of "+ maxTemp+
+		return "The temperature in "+city+", "+country+" it is "+curTemp+"c with "+ weatherType+". The low is "+lowTemp+"c with a high of "+ maxTemp+
 				"c. The humidty is "+humidity+"% and the wind speed is "+speed+"mph";
 		
 	}

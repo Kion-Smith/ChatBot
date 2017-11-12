@@ -1,5 +1,7 @@
 //Test class
 
+import java.util.ArrayList;
+
 import org.jibble.pircbot.*;
 
 public class MyBot extends PircBot
@@ -12,12 +14,14 @@ public class MyBot extends PircBot
 	public void onMessage(String channel, String sender,String login, String hostname, String message) 
 	{
 		weatherAPI w= new weatherAPI();
-		//System.out.println(weather.webRequest("Dallas"));
+		newsAPI n = new newsAPI();
 		
-		if (message.equalsIgnoreCase("time")) 
+		if(message.equalsIgnoreCase("!help"))
 		{
-			String time = new java.util.Date().toString();
-			sendMessage(channel, "Kion" + ": The time is now " + time);
+			sendMessage(channel,"You can get the weather from any where by using !weather [location]");
+			sendMessage(channel,"You can get the top article from several articles by using !news [news publication]");
+			sendMessage(channel,"You can use the !help command to see this again");
+			
 		}
 		else if(message.contains("!weather "))
 		{
@@ -32,17 +36,25 @@ public class MyBot extends PircBot
 			}
 			catch(Exception e)
 			{
-				
+				e.printStackTrace();
 			}
 			
 		}
-		else if (message.equalsIgnoreCase("Hello")) 
+		else if(message.contains("!news "))
 		{
-			sendMessage(channel, "Hello Kion!");
+			String temp,temp2;
+			try
+			{
+				
+				temp = message.substring(message.indexOf("s")+2);	
+				sendMessage(channel,n.websiteExist(temp));
+
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
-		else if(message.equalsIgnoreCase("Bye bot"))
-		{
-			sendMessage(channel, "Bye Kion!");
-		}
+		
 	}
 }

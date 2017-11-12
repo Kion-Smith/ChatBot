@@ -46,6 +46,7 @@ public class ChatBotMain
 		b.setVerbose(true);
 		b.connect("irc.freenode.net");
 		b.joinChannel(channel);
+		b.onMessage(channel,b.getName(),"a","meme","!help");
 	
 		
 		writer = new BufferedWriter(new OutputStreamWriter( socket.getOutputStream() ) );
@@ -75,8 +76,6 @@ public class ChatBotMain
         //  sendString(writer,"PRIVMSG "+channel+" :"+cf.getChatPanel().getMessageTextArea().getText()+"\n");
         
 		///Join the channel.
-        weatherAPI weather= new weatherAPI();
-		System.out.println(weather.webRequest("Dallas"));
 		
         writer.write("JOIN " + channel + "\r\n");
         writer.flush( );
@@ -95,17 +94,14 @@ public class ChatBotMain
         		
         		String userName = line.substring(0+1,line.indexOf("!"));
         		String newMes = "<"+userName+"> joined "+ channel;
-        		//System.out.println(userName+"------------------------");
         		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
         		
         		if(!currentUsers.contains(userName) )
     			{
     				currentUsers.add(userName);
     				cf.getOnlineUsersPanel().getUsersOnline().append(userName+"\n");
-    				//cf.getOnlineUsersPanel().getListModel().addElement(userName);
     				
     			}
-        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
         	}
         	if(line.contains("!") && (line.contains("LEAVE") || line.contains("QUIT")) )
         	{
@@ -123,9 +119,6 @@ public class ChatBotMain
     				cf.getOnlineUsersPanel().getUsersOnline().append( currentUsers.get(i)+"\n");
     			}
     			
-    			//cf.getOnlineUsersPanel().getListModel().removeElement(userName);
-    				
-        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");
         	}
         	if(line.contains("!") && line.contains("MSG"))
         	{
@@ -134,7 +127,6 @@ public class ChatBotMain
         		String newMes = "<"+userName+">"+message;
         		cf.getChatPanel().getChatBoxTextArea().append(newMes +"\n");
         		
-        		//cf.getChatPanel().getChatBoxTextArea().append(line +"\n");  
         	}
         	if(line.contains("353") && line.contains("@ "+channel))
         	{
@@ -145,23 +137,16 @@ public class ChatBotMain
         		
         		for(int i =0;i<usersListString.length;i++)
         		{
-        			//System.out.println(usersListString[i]);
+
         			if(!currentUsers.contains(usersListString[i]+"") )
         			{
         				cf.getOnlineUsersPanel().getUsersOnline().append(usersListString[i]+"\n");
         				currentUsers.add(usersListString[i]+"");
-        				//cf.getOnlineUsersPanel().getListModel().addElement( usersListString[i] );
+
         				
         			}
-        			//cf.getOnlineUsersPanel().getListModel().addElement(usersListString[i]);
+
         		}
-        		
-        		
-        		
-        		
-        			
-        			//cf.getOnlineUsersPanel().getListModel().addElement(b.getName());
-        		
 
   
         	}
