@@ -1,23 +1,17 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 public class onlineUsersPanel extends JPanel
 {
 	private JLabel usersLabel;
-	private JList usersList;
-	private DefaultListModel listModel;
 	private JScrollPane userScrollPane;
 	private TitledBorder usersBorder;
 	private JTextArea usersOnline;
@@ -33,8 +27,6 @@ public class onlineUsersPanel extends JPanel
 		usersOnline.setEditable(false);
 		userScrollPane = new JScrollPane(usersOnline);
 		
-		listModel = new DefaultListModel();//need to change to text area
-		usersList = new JList(listModel);
 		//userScrollPane = new JScrollPane(usersList);
 		
 		setBorder(usersBorder);
@@ -64,14 +56,6 @@ public class onlineUsersPanel extends JPanel
 	{
 		return userScrollPane;
 	}
-	public JList getUsersList()
-	{
-		return usersList;
-	}
-	public DefaultListModel getListModel()
-	{
-		return listModel;
-	}
 	public JTextArea getUsersOnline()
 	{
 		return usersOnline;
@@ -91,14 +75,11 @@ public class onlineUsersPanel extends JPanel
 	{
 		userScrollPane = j;
 	}
-	public void setUsersList(JList j)
+	public void setUsersOnline(JTextArea j)
 	{
-		usersList = j;
+		 usersOnline =j;
 	}
-	public void setListModel(DefaultListModel m)
-	{
-		listModel = m;
-	}
+
 	
 	
 }

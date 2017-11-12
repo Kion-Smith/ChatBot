@@ -21,14 +21,11 @@ public class MyBot extends PircBot
 		}
 		else if(message.contains("!weather "))
 		{
-			String temp;
+			String location;
 			try
 			{
-				temp = message.substring(message.indexOf("r")+2);
-				System.out.println(temp);
-				//System.out.println( );
-				
-				sendMessage(channel,w.webRequest(temp));
+				location = message.substring(message.indexOf("r")+2);
+				sendMessage(channel,w.webRequest(location));
 			}
 			catch(Exception e)
 			{
@@ -38,12 +35,12 @@ public class MyBot extends PircBot
 		}
 		else if(message.contains("!news "))
 		{
-			String temp,temp2;
+			String website;
 			try
 			{
 				
-				temp = message.substring(message.indexOf("s")+2);	
-				sendMessage(channel,n.websiteExist(temp));
+				website = message.substring(message.indexOf("s")+2);	
+				sendMessage(channel,n.websiteExist(website));
 
 			}
 			catch(Exception e)

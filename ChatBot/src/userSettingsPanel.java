@@ -7,8 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class userSettingsPanel extends JPanel
