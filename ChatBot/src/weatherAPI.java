@@ -1,3 +1,10 @@
+/*Name: Kion Smith
+ * NetID: kls160430
+ * CS2336-502
+ * 
+ *  weather api class
+ *  	-gets json information and return the weather in a city using zip codes or city names
+ */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -17,24 +24,29 @@ public class weatherAPI
 	
 	public String webRequest(String city)
 	{
-
+		//create url with city
 		String weatherURL = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=6f5cb0dac2efcecee28d199be78da4cb";
 		StringBuilder result = new StringBuilder();
 		
 		try
 		{
 			URL  url = new URL(weatherURL);
+			//make connection to api
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			//request for get 
 			conn.setRequestMethod("GET");
+			//read the string
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			
 			String line;
 			while((line = rd.readLine())!= null)
 			{
+				//add to result string
 				result.append(line);
 			}
 			rd.close();
 			
+			//get json info and return
 			String weather = parseJson(result.toString());
 			return weather;
 		}
@@ -49,29 +61,36 @@ public class weatherAPI
 	
 	public String parseJson(String json)
 	{
+		//create master json object
 		JsonElement jelement = new JsonParser().parse(json);
 		JsonObject MasterWeatherObject = jelement.getAsJsonObject();
 		
+		//get city name
 		JsonObject weatherObject  = MasterWeatherObject.getAsJsonObject();
 		String city = weatherObject.get("name").getAsString();
 		
+		//get country name
 		JsonObject sysObject = MasterWeatherObject.getAsJsonObject("sys");
 		String country= sysObject.get("country").getAsString();
 		
+		//get weather type (ex cloudy,rain,ect.)
 		JsonObject weatherTypeObject = MasterWeatherObject.getAsJsonObject();
 		JsonArray jarray = weatherTypeObject.getAsJsonArray("weather");
 		weatherTypeObject =jarray.get(0).getAsJsonObject();
 		String weatherType = weatherTypeObject.get("description").getAsString();
 		
+		//get wind speed
 		JsonObject windObject = MasterWeatherObject.getAsJsonObject("wind");
 		double speed= windObject.get("speed").getAsDouble();
 		
+		//get temperatures
 		JsonObject tempObject = MasterWeatherObject.getAsJsonObject("main");
 		double curTemp= tempObject.get("temp").getAsDouble();
 		double humidity= tempObject.get("humidity").getAsDouble();
 		double lowTemp= tempObject.get("temp_min").getAsDouble();
 		double maxTemp= tempObject.get("temp_max").getAsDouble();
 		
+		//covert from kelvin to celcius
 		curTemp = convertKtoF(curTemp);
 		lowTemp = convertKtoF(lowTemp);
 		maxTemp = convertKtoF(maxTemp);

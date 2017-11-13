@@ -1,3 +1,12 @@
+/*Name: Kion Smith
+ * NetID: kls160430
+ * CS2336-502
+ * 
+ * 
+ *  chat panel class
+ *  	-creates everything inside the chat box
+ */
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,6 +20,7 @@ import javax.swing.border.TitledBorder;
 
 public class chatPanel extends JPanel
 {
+	//all elements for panel
 	private JButton sendButton, clearButton;
 	private JTextArea chatBoxTextArea,messageTextArea;
 	private JScrollPane chatScrollPane,messageScrollPane;//add setters and getters
@@ -18,39 +28,45 @@ public class chatPanel extends JPanel
 	
 	public chatPanel()
 	{
-		
+		//instantiates button
 		sendButton = new JButton("SEND");
 		clearButton = new JButton("CLEAR");
 		
+		//instantiates textareas
 		chatBoxTextArea = new JTextArea(5,20);
 		messageTextArea= new JTextArea(5,20);
 		
+		//instantiates scroll pane
 		chatScrollPane = new JScrollPane(chatBoxTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		messageScrollPane = new JScrollPane(messageTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
+		//instantiates border
 		chatBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "CHATROOM");
 
-		
+		//add line wrap to textarea, and set chat box to uneditable
 		chatBoxTextArea.setEditable(false);
 		chatBoxTextArea.setLineWrap(true);
 		messageTextArea.setLineWrap(true);
 		
+		//set layout
 		setBorder(chatBorder);
 		setLayout(new GridBagLayout() );
 		GridBagConstraints gc = new GridBagConstraints();
 		
-	
+		//Add chatScrollPane
+		//set location within the panel
 		gc.gridx = 0;
 		gc.gridy = 0;
-		gc.anchor = GridBagConstraints.NORTHWEST;
-		gc.fill = GridBagConstraints.BOTH;
-		gc.weightx = 1;
+		gc.anchor = GridBagConstraints.NORTHWEST;//set anchor
+		gc.fill = GridBagConstraints.BOTH;//set fill
+		gc.weightx = 1;//set weight
 		gc.weighty = 1;
-		gc.ipadx=300;
+		gc.ipadx=300;//set padding
 		gc.ipady =240;
-		gc.insets = new Insets(15,15,0,0);
+		gc.insets = new Insets(15,15,0,0);//create insets space
 		add(chatScrollPane,gc);
 
+		//Add messageScrollPane
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.fill = GridBagConstraints.BOTH;
@@ -62,6 +78,7 @@ public class chatPanel extends JPanel
 		gc.insets = new Insets(15, 15, 15, 0);
 		add(messageScrollPane, gc);
 		
+		//Add sendButton
 		gc.fill = GridBagConstraints.REMAINDER;
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -71,6 +88,7 @@ public class chatPanel extends JPanel
 		gc.insets = new Insets(40, 50, -40, -50);
 		add(sendButton, gc);
 		
+		//Add clearButton
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.ipadx = 50;
