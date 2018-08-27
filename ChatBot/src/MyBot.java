@@ -15,7 +15,7 @@ public class MyBot extends PircBot
 	{
 		this.setName("KionBot");
 	}
-	//Overridden method of on message
+	//Overloaded method of on message
 	public void onMessage(String channel, String sender,String login, String hostname, String message) 
 	{
 		//instantiates api's
